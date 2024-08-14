@@ -1,5 +1,6 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
+import requests
 
 # Clé API Google Generative Language
 API_KEY = "AIzaSyD1sIW43FYKHF16pev53JARHg3TTUFF-tI"  # Remplace par ta clé API
