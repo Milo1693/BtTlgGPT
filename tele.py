@@ -1,10 +1,5 @@
-from flask import Flask
-import requests
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
-
-# Créer une application Flask
-app = Flask(__name__)
 
 # Clé API Google Generative Language
 API_KEY = "AIzaSyD1sIW43FYKHF16pev53JARHg3TTUFF-tI"  # Remplace par ta clé API
@@ -53,11 +48,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Bienvenue sur le bot ! Pose-moi une question.")
 
-# Définir un itinéraire pour la page d'accueil
-@app.route('/')
-def hello_world():
-    return "Ce bot est fabriqué par Manifatic et actuellement il est hébergé et en direct pour tout Manifatic"
-
 if __name__ == "__main__":
     # Crée et configure le bot avec ton token Telegram
     bot_token = "7388184733:AAFveKo2QPJb0QZNMPSjpp7rcnuYdp6DUS0"  # Remplace par ton token
@@ -67,9 +57,5 @@ if __name__ == "__main__":
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    # Lancer le bot Telegram dans un thread séparé
-    import threading
-    threading.Thread(target=application.run_polling).start()
-
-    # Exécuter l'application Flask
-    app.run(host="0.0.0.0", port=5000)
+    # Démarre le bot
+    application.run_polling()
